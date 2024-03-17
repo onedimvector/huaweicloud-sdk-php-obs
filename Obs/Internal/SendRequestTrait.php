@@ -610,7 +610,7 @@ trait SendRequestTrait
                 }
             }
 
-            if (!$hasContentTypeFlag && isset($params['SourceFile'])) {
+            if (!$this->hasContentType($params) && isset($params['SourceFile'])) {
                 try {
                     $params['ContentType'] = Psr7\mimetype_from_filename($params['SourceFile']);
                 } catch (\Throwable $e) {
@@ -618,7 +618,7 @@ trait SendRequestTrait
                 }
             }
 
-            if (!$hasContentTypeFlag) {
+            if (!$this->hasContentType($params)) {
                 $params['ContentType'] = 'binary/octet-stream';
             }
         }
